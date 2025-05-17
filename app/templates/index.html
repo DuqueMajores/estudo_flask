@@ -11,7 +11,11 @@
         <h5>Primeiro Site Deployed</h5>
     </div>
     <div>
-        <p>Parabens! Voce conseguiu</p>
+        <p>Parabens {{context.usuario}}! voce conseguiu</p>
+        <p>Voce tem {{context.idade}} anos</p>
+    </div>
+    <div>
+        <a href="{{url_for('formulario')}}">Formulario</a>
     </div>
 </body>
 </html>
