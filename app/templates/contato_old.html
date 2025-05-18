@@ -10,7 +10,7 @@
 <body>
     <div class="container">
         <div class="row col-9 mt-4">
-            <h3>Contatos</h3>
+            <h3>Formulario GET</h3>
         </div>
         <form action="" method="get" class="row mt-2">
             <div class="col-9">
@@ -24,6 +24,36 @@
         <p></p>
         <p>Você pesquisou por {{context.pesquisa}}</p>
 
+        <hr>
+        <hr>
+
+        <div class="row col-9">
+            <h3>Formulario POST</h3>
+        </div>
+        <form action="" method="post" class="row mt-2">
+            <div class="col-6">
+                <label for="nome">Nome</label>
+                <input type="text" name="nome" id="nome" class="form-control" placeholder="Digite um nome">
+            </div>
+            <div class="col-6">
+                <label for="email">E-mail</label>
+                <input type="email" name="email" id="email" class="form-control" placeholder="Digite um e-mail">
+            </div>
+            <div class="col-12">
+                <label for="assunto">Assunto</label>
+                <input type="text" name="assunto" id="assunto" class="form-control" placeholder="Diga o assunto">
+            </div>
+            <div class="col-12">
+                <label for="mensagem">Mensagem</label>
+                <input type="text" name="mensagem" id="mensagem" class="form-control" placeholder="Escreva a mensagem">
+            </div>
+            <div class="col-12">
+                <button type="submit" class="btn btn-primary mt-4 col-12">Cadastrar</button>
+            </div>
+        </form>
+
+        <hr>
+        <hr>
     </div>
 
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
