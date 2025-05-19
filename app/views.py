@@ -23,8 +23,24 @@ def formulario_form():
 
     return render_template('contato_form.html', context=context, form=form)
 
+@app.route('/contato/lista')
+def contatoLista():
+    if request.method == 'GET':
+        pesquisa = request.args.get('pesquisa', '')
+    dados = Contato.query.order_by('nome')
+    if pesquisa != '':
+        dados = dados.filter_by(nome=pesquisa)
+    context = {'dados':dados.all()}
+    pessoas = Contato.query.all()
+    quantidade = len(pessoas)
 
-### Formato nao recomendado
+    for linha in dados:
+        print(linha.nome)
+
+    return render_template('contato_lista.html', context=context, pessoas=pessoas, quantidade=quantidade)
+
+
+### Formulario nao recomendado
 
 @app.route("/formulario_old", methods=['GET', 'POST'])
 def formulario_old():

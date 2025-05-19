@@ -1,11 +1,7 @@
-<!DOCTYPE html>
-<html lang="pt-br">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estudo Flask</title>
-</head>
-<body>
+{% extends 'base.html' %}
+
+{% block content %}
+
     <div>
         <h3>Estudo Flask</h3>
         <h5>Primeiro Site Deployed</h5>
@@ -14,11 +10,7 @@
         <p>Parabens {{context.usuario}}! voce conseguiu</p>
         <p>Voce tem {{context.idade}} anos</p>
     </div>
-    <div>
-        <a href="{{url_for('formulario_old')}}">Formulario</a>
-    </div>
-    <div>
-        <a href="{{url_for('formulario_form')}}">Formulario Seguro</a>
-    </div>
-</body>
-</html>
+
+    {% include 'nav.html' %}
+    
+{% endblock %}
