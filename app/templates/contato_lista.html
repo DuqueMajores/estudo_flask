@@ -2,9 +2,10 @@
 
 {% block content %}
 
-    {% include 'nav.html' %}
-
     <div class="container">
+
+        {% include 'nav.html' %}
+
         <div class="row">
 
             <label for="pesquisa" class="m-3"><h3>Lista de Contatos</h3></label>
@@ -39,6 +40,9 @@
                             <td>{{linha.email}}</td>
                             <td>{{linha.assunto}}</td>
                             <td>{{linha.mensagem}}</td>
+                            <td>
+                                <a href="{{url_for('contato_detalhe', id=linha.id)}}"><img src="{{url_for('static', filename='img/seta.png')}}" alt="btn-seta"></a>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>

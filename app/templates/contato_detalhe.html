@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div class="container">
+        {% include 'nav.html' %}
+
+        <h3 class="mt-3">Detalhe do Contato: {{obj.id}}</h3>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <label for="nome">Nome:</label>
+                <input type="text" id="nome" name="nome" value="{{obj.nome}}" class="form-control bg-secondary text-white" readonly>
+            </div>
+            <div class="col-md-6">
+                <label for="email">E-mail:</label>
+                <input type="text" id="email" name="email" value="{{obj.email}}" class="form-control bg-secondary text-white" readonly>
+            </div>
+            <div class="col-md-12">
+                <label for="assunto">Assunto:</label>
+                <input type="text" name="assunto" id="assunto" value="{{obj.assunto}}" class="form-control bg-secondary text-white" readonly>
+            </div>
+            <div class="col-md-12">
+                <label for="mensagem">Assunto:</label>
+                <textarea rows="3" type="textarea" name="mensagem" id="mensagem" class="form-control bg-secondary text-white" readonly>{{obj.mensagem}}</textarea>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

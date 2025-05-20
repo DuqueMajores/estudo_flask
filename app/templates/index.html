@@ -2,6 +2,8 @@
 
 {% block content %}
 
+    {% include 'nav.html' %}
+
     <div>
         <h3>Estudo Flask</h3>
         <h5>Primeiro Site Deployed</h5>
@@ -11,6 +13,6 @@
         <p>Voce tem {{context.idade}} anos</p>
     </div>
 
-    {% include 'nav.html' %}
+    <img src="{{url_for('static', filename='img/flask_logo.png')}}" alt="flask logo" class="img-fluid">
     
 {% endblock %}

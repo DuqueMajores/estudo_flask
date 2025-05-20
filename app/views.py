@@ -3,6 +3,7 @@ from flask import render_template, url_for, request, redirect
 from app.models import Contato
 from app.forms import ContatoForm
 
+### Pagina Index
 @app.route("/")
 def homepage():
     context = {
@@ -12,7 +13,6 @@ def homepage():
     return render_template('index.html', context=context)
 
 ### Formulario Seguro
-
 @app.route("/formulario", methods=['GET', 'POST'])
 def formulario_form():
     form = ContatoForm()
@@ -23,11 +23,12 @@ def formulario_form():
 
     return render_template('contato_form.html', context=context, form=form)
 
+### Lista de Contatos
 @app.route('/contato/lista')
 def contatoLista():
     if request.method == 'GET':
         pesquisa = request.args.get('pesquisa', '')
-    dados = Contato.query.order_by('nome')
+    dados = Contato.query.order_by('id')
     if pesquisa != '':
         dados = dados.filter_by(nome=pesquisa)
     context = {'dados':dados.all()}
@@ -39,9 +40,13 @@ def contatoLista():
 
     return render_template('contato_lista.html', context=context, pessoas=pessoas, quantidade=quantidade)
 
+### Rota Dinamica
+@app.route('/contato/<int:id>/')
+def contato_detalhe(id):
+    obj = Contato.query.get(id)
+    return render_template('contato_detalhe.html', obj=obj)
 
 ### Formulario nao recomendado
-
 @app.route("/formulario_old", methods=['GET', 'POST'])
 def formulario_old():
     context = {}
