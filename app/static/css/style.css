@@ -6,3 +6,10 @@
 #img_post{
     width: 460px;
 }
+
+@media screen and (max-width:760px){
+    #img_post{
+        width: 100%;
+        height: auto;
+    }
+}
