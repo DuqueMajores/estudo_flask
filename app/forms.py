@@ -3,7 +3,7 @@ from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Email, EqualTo, ValidationError
 
 from app import db, bcrypt
-from app.models import Contato, User, Post
+from app.models import Contato, User, Post, PostComentarios
 
 class UserForm(FlaskForm):
     nome = StringField('Nome', validators=[DataRequired()])
@@ -74,4 +74,18 @@ class PostForm(FlaskForm):
         )
 
         db.session.add(post)
+        db.session.commit()
+
+class PostComentarioForm(FlaskForm):
+    comentario = StringField('Comentario', validators=[DataRequired()])
+    btnSubmit = SubmitField('Enviar')
+
+    def save(self, user_id, post_id):
+        comentario = PostComentarios(
+            comentario = self.comentario.data,
+            user_id = user_id,
+            post_id = post_id
+        )
+
+        db.session.add(comentario)
         db.session.commit()

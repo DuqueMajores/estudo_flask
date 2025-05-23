@@ -1,9 +1,9 @@
 from app import app, db
 from flask import render_template, url_for, request, redirect
 from flask_login import login_required
-from flask_login import login_user, logout_user, current_user
+from flask_login import login_user, logout_user, current_user, login_required
 from app.models import Contato, Post
-from app.forms import ContatoForm, UserForm, LoginForm, PostForm
+from app.forms import ContatoForm, UserForm, LoginForm, PostForm, PostComentarioForm
 
 ### Pagina Index
 @app.route("/", methods=['GET', 'POST'])
@@ -35,6 +35,7 @@ def cadastro():
 
 ###Logout 
 @app.route("/sair/")
+@login_required
 def logout():
     logout_user()
     return redirect(url_for('homepage'))
@@ -51,12 +52,25 @@ def PostNovo():
 
 ###Lista de Posts
 @app.route("/post/lista/")
+@login_required
 def PostLista():
     posts = Post.query.all()
     return render_template('post_lista.html', posts=posts)
 
+###Comentarios
+@app.route("/post/<int:id>", methods=['GET', 'POST'])
+@login_required
+def PostDetalhe(id):
+    post = Post.query.get(id)
+    form = PostComentarioForm()
+    if form.validate_on_submit():
+        form.save(current_user.id, id)
+        return redirect(url_for('PostDetalhe', id=id))
+    return render_template('post.html', post=post, form=form)
+
 ### Formulario Seguro
 @app.route("/formulario", methods=['GET', 'POST'])
+@login_required
 def formulario_form():
     form = ContatoForm()
     context = {}
@@ -68,7 +82,11 @@ def formulario_form():
 
 ### Lista de Contatos
 @app.route('/contato/lista')
+@login_required
 def contatoLista():
+
+    if current_user.id == 1: return redirect(url_for('homepage'))
+
     if request.method == 'GET':
         pesquisa = request.args.get('pesquisa', '')
     dados = Contato.query.order_by('id')
@@ -85,12 +103,14 @@ def contatoLista():
 
 ### Rota Dinamica
 @app.route('/contato/<int:id>/')
+@login_required
 def contato_detalhe(id):
     obj = Contato.query.get(id)
     return render_template('contato_detalhe.html', obj=obj)
 
 ### Formulario nao recomendado
 @app.route("/formulario_old", methods=['GET', 'POST'])
+@login_required
 def formulario_old():
     context = {}
     if request.method == 'GET':

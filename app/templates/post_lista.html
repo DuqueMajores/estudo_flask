@@ -22,9 +22,15 @@
                     <tbody>
                         {% for linha in posts %}
                         <tr>
-                            <td>{{linha.msg_resumo()}}</td>
-                            <td>{{linha.user.nome}}</td>
-                            <td>""</td>
+                            <td>
+                                {{linha.msg_resumo()}}
+                            </td>
+                            <td>
+                                {{linha.user.nome}}
+                            </td>
+                            <td>
+                                <a href="{{url_for('PostDetalhe', id=linha.id)}}">Detalhes</a>
+                            </td>
                         </tr>
                         {% endfor %}
                     </tbody>
