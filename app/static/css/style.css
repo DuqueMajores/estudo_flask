@@ -4,12 +4,7 @@
 }
 
 #img_post{
-    width: 460px;
+    width: 100%;
+    height: auto;
 }
 
-@media screen and (max-width:760px){
-    #img_post{
-        width: 100%;
-        height: auto;
-    }
-}
